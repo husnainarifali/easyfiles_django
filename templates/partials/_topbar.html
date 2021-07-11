@@ -1,0 +1,132 @@
+<style>
+  .topbar
+  {
+    background-color: #4f868c!important;
+    color: white;
+    font-size:large;
+  }
+  #nn
+{
+  color: white;
+  font-size:x-large;
+}
+</style>
+<link rel="icon" href="https://c8.alamy.com/comp/FP6XE3/easy-icon-internet-button-on-white-background-FP6XE3.jpg" type="imagee">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow topbar">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+          
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              {%if request.user.is_superuser%}
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'admin:index' %}">Django Admin</a>
+              </li>
+              {%endif%}
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'firmware' %}">Firmwares</a>
+              </li>
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'home' %}">Mobiles Accessries</a>
+                </li>
+                
+              
+            </ul>
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter" id='nn'>{{contacts}}</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                {%if requests%}
+                  {%for i in requests%}
+
+                 {%ifequal False i.complete_status%}
+
+                <a class="dropdown-item d-flex align-items-center" href="{%url 'userRequest'%}">
+                  <div class="mr-3">
+                    <div class="fas fa-envelope fa-fw bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">{{i.order}}</div>
+                    <span class="font-weight-bold"> <b> {{i.order}} </b>  He want To Purchese {{i.quantity}} {{i.products.product_type}} of <b>{{i.products}} </b> Click for Details </p></span>
+                  </div>
+                </a>
+                {%endifequal%}
+                {%endfor%}
+        
+        
+        {%endif%}
+        
+                
+                <a class="dropdown-item text-center small text-gray-500" href="{%url 'userRequest'%}">Show All Alerts</a>
+              </div>
+            </li>
+
+            
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-white-600 x-large">{{request.user}}</span>
+                <img class="img-profile rounded-circle" style="width:50px;height:50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTUatbS2Ru11J8v5f_aFcdY0IkDA1Wk7kR1mg&usqp=CAU">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}" >
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+
+
+                
+
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>

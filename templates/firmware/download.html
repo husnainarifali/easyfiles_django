@@ -1,0 +1,110 @@
+{% extends 'firmware/base.html'%}
+
+{%block style%}
+<style>
+
+
+</style>
+{%endblock%}
+
+{%block contant%}
+<div class='col-md-12'>
+    {% if messages %}
+{% for message in messages %}
+<ul class="messages">
+    <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+      </div>
+            
+    {% endfor %}	
+    {%endif%}</ul></div>
+
+
+<div class="inline-width pad-b-40 width-100per single-file-contentcol-md-8 ml-3 ">
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12 ">
+        <p class="alert bg-info text-center pad-10"><strong>If file ask password and below password not work contect:+923035313249 : </strong></p>
+    </div>
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12 no-margin no-padding mt-5">
+        <h1 class="file-title page-title ml-5 text-justify text-nowrap text-truncate d-flex justify-content-center" style="font-size:3vw;">{{file.detailFileName}}</h1>
+        
+        
+
+        <div class="file-details">
+
+            <div class=" no-margin no-padding ml-2 mr-2">
+                <table class="table" style="white-space: nowrap">
+                    <tbody>
+
+                        <tr>
+                            <p class="file-description mr-5 ml-5 d-flex justify-content-center section-description mar-t-20 small ml-5">{{file.desc}}
+                            </p>
+                        </tr>
+                        <tr>
+                            <td class="bold text-right">Date</td>
+                            <td class="text-left"><span>{{file.date}}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold text-right">Downloads</td>
+                            <td class="text-left"><span>{{file.countTotal}}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold text-right">Password</td>
+                            <td class="text-left"><span>{{file.password}}</span></td>
+                        </tr>
+
+                        <tr class="hidden">
+                            <td class="bold text-right">Subscribe</td>
+                            <td class="text-left ml-2">
+                                <script src="https://apis.google.com/js/platform.js"></script>
+
+                                <div class="g-ytsubscribe ml-3" data-channelid="UCc4kl0aE_s8GzXHnJeopn-w" data-layout="default" data-count="default"></div>
+                                </span>
+                            </td>
+                        </tr>
+
+
+                        <tr class="hidden">
+                            <td class="bold text-right">Subscribe</td>
+                            <td class="text-left"><span>
+                                <script src="https://apis.google.com/js/platform.js"></script>
+
+                                <div class="g-ytsubscribe" data-channelid="UC7kDJSN8R2Osu-titqOH7bw" data-layout="default" data-count="default"></div>
+                            </span></td>
+
+                        </tr>
+                        <tr class="hidden">
+                            <td class="bold text-right">Login Status</td>
+                            <td class="text-left"><span>
+                                {% if request.user.is_authenticated %}
+                                <div class="text-success"> {{request.user}}  &#9989;</div>
+                                {%else%}
+                                <div class="text-danger">Please Login First <a href="{% url 'userprofile' %}" target=blank>Click Here</a></div>
+                                {%endif%}
+                            </span></td>
+
+                        </tr>
+
+
+                    </tbody>
+                    <!-- Send button -->
+
+                </table>
+               
+                
+                
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'confirmDow' file.id %}">
+                    <button class="btn btn-info btn-block bg-dark" type="submit">Download</button></a>
+                        {%else%}
+                        <button disabled class="btn btn-info btn-block bg-dark" type="submit">Download</button>
+                        
+                    {%endif%}
+            
+        </div>
+    </div></div>
+    
+    {% endblock %}

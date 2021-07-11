@@ -1,0 +1,261 @@
+
+{%extends 'base.html'%}
+{%load static%}
+{%block mystyle%}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
+<style> 
+    #del{
+      color: white;
+  
+    }
+    .add-btn
+    {
+      background-color: #025058!important;
+      color: white;
+    }
+          #no-data
+        {
+          font-family: 'Times New Roman', Times, serif;
+          font-style: oblique;
+          color: white;
+          margin-right:2%;
+          font-size: 20px;
+        
+        }
+        #current-user
+        {
+          
+          font-style: oblique;
+          
+          margin-right:2%;
+          font-size: 20px;
+          margin-right: 4%;
+        
+          font-family: 'Times New Roman', Times, serif;
+          
+         
+        
+      }
+      
+  
+  
+      .btm-bar{
+        margin-left: 30%;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        
+    }
+    .alert {
+      display:inline-block;
+      margin-top: 1%;
+    }
+  
+</style>
+{%endblock%}
+{%block content%}
+
+{% if messages %}
+{% for message in messages %}
+
+    <div
+   
+   class="alert alert-{{message.tags}} w-20 p-1 col-md-9 ml-4 "  role="alert">
+        {{message}}
+      </div>
+            
+    {% endfor %}	
+    {%endif%}
+<div class="container">
+    <br>
+    
+    
+    
+<div class="row">
+<div class="col-md-12 py-0">
+    <div class="box-element">
+
+        
+        <table class="table">
+            <tr>
+                <th><h5>Unblock Users:{{unblockcount}} </th>
+                <th><h5>Getable Balnance:Rs.{{sum}}</h5></th>
+                <th><h5>BLock User: {{blockcount}}</h5></th>
+          
+       
+            </tr>
+        </table>
+
+    </div>
+
+    <br>
+    <div class="box-element">
+      <div class="cart-row">
+        
+    <div style="flex:2"><strong>Name</strong></div>
+    <div style="flex:2"><strong>Block/Unblock</strong></div>
+    <div style="flex:1"><strong>Total Price</strong></div>
+    
+  
+    <div style="flex:1"><strong>Pay Balnance</strong></div>
+ 
+  <div style="flex:1"><strong>Details</strong></div>
+  
+</div>
+{% for item in order  %}
+        <div class="cart-row">
+    
+            <div style="flex:2"><p> {{item.user}}</p></div>
+            {%if item.complete%}
+            <div style="flex:1"><p>Block</p></div>
+            {%else%}
+            <div style="flex:1"><p>Unblock</p></div>
+            {%endif%}
+            <div style="flex:1"><p>{{item.TotalBalance}}</p></div>
+            
+                
+                
+                <div style="flex:1" class='balancs'>
+                 
+               
+              <!-- Button trigger modal -->
+<button type="button"  data-user="{{item.user.id}}" data-action='add'class="btn btn-outline-secondary add-btn addbalance" data-toggle="modal" data-target="#exampleModalLong">
+ add
+</button>
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Amount to Coustomer Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <!-- Material input -->
+        <div class="md-form">
+          <input type="number" id="myInput" name="amount" class="form-control inputvalue" >
+          <label for="form1">Enter Amount</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-secondary add-btn "onclick="myFunction()">Add Amount</button>
+     
+      </div>
+    </div>
+  </div>
+</div> 
+                  
+                  </div>
+               
+                  <div style="flex:1">
+                 
+               
+                    <a href="{% url 'userview' item.user.id %}" target="_blank"><button type="button"  class="btn btn-outline-secondary add-btn addbalance"  title="If You want to see Details this User Press View Button "> View</button></a>
+     
+                     </div>
+                
+                        </div>
+                        {% endfor %}
+
+
+
+
+
+
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+</div>
+
+</div>
+{%endblock%}
+{%block script%}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+
+  
+</script>
+<script type="text/javascript" src="/static/js/add-balance.js"></script>
+<script type="text/javascript">
+  var user = '{{request.user}}'
+
+  function getToken(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  var csrftoken = getToken('csrftoken')
+
+  function getCookie(name) {
+    // Split cookie string and get all individual name=value pairs in an array
+    var cookieArr = document.cookie.split(";");
+
+    // Loop through the array elements
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+
+    // Return null if not found
+    return null;
+}
+var cart = JSON.parse(getCookie('cart'))
+
+if (cart == undefined){
+  cart = {}
+  console.log('Cart Created!', cart)
+  document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+}
+console.log('Cart:', cart)
+
+
+</script>
+
+
+
+{%endblock%}
+

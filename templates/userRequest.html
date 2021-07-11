@@ -1,0 +1,108 @@
+
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+
+{% if messages %}
+{% for message in messages %}
+
+<ul class="messages col-md-12">
+    <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+      </div>
+            
+    {% endfor %}
+ 
+    
+        
+    {%endif%}
+    
+{%if orderitem%}
+        {%for i in orderitem%}
+
+            {%ifequal False i.complete_status%}
+
+            
+
+
+                <div class='col-md-12'>
+                <div class="card">
+                    <h5 class="card-header"><b>{{i.order}}</b></h5>
+                    <div class="card-body">
+                    <h5 class="card-title">{{i.products}}</h5>
+                    <p class="card-text"> <b> {{i.order}} </b>  He want To Purchese  <b>{{i.products}} </b>{{i.products.product_type}} if he Take  {{i.products}} Products Then Press Acepte OtherWise Delete </p>
+                    <div class='mr-1'>
+                    <button type="button" data-action='Acepte' data-product={{i.products.id}} data-orderitem='{{i.id}}' class="btn btn-success user_request">Acepte</button>
+                    <button type="button" data-orderitem='{{i.id}}' data-product={{i.products.id}} data-action='delete' class="btn btn-danger user_request">Delete</button>
+                    
+                    </div>
+                </div>
+                </div>
+                
+                </div>
+                
+
+            {%endifequal%}
+        {%endfor%}
+
+
+{%endif%}
+{%endblock%}
+{%block script%}
+
+
+
+<script type="text/javascript" src="/static/js/userRequest.js"></script>
+<script type="text/javascript">
+    var user = '{{request.user}}'
+  
+    function getToken(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getToken('csrftoken')
+  
+    function getCookie(name) {
+      // Split cookie string and get all individual name=value pairs in an array
+      var cookieArr = document.cookie.split(";");
+  
+      // Loop through the array elements
+      for(var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+  
+          /* Removing whitespace at the beginning of the cookie name
+          and compare it with the given string */
+          if(name == cookiePair[0].trim()) {
+              // Decode the cookie value and return
+              return decodeURIComponent(cookiePair[1]);
+          }
+      }
+  
+      // Return null if not found
+      return null;
+  }
+  var cart = JSON.parse(getCookie('cart'))
+  
+  if (cart == undefined){
+    cart = {}
+    console.log('Cart Created!', cart)
+    document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+  }
+  console.log('Cart:', cart)
+  
+  
+  </script>
+  
+{%endblock%}

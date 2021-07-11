@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class='col-md-9'>
+    {% if messages %}
+{% for message in messages %}
+<ul class="messages">
+    <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+      </div>
+            
+    {% endfor %}	
+    {%endif%}
+<form class="text-center border border-light p-5" method="POST" action=""enctype="multipart/form-data">
+    {% csrf_token %}  
+    
+    
+        <!-- Name -->
+        <input list="product-list" name="p_name"required  id="defaultContactFormName"  class="form-control mb-4 addorder" placeholder="Product Name">
+        <datalist id="product-list">
+            {%for i in Product%}
+          <option value={{i.product_name}}>
+          {%endfor%}
+        </datalist>
+        
+        <input type="text" id="defaultContactFormName" required class="form-control mb-4"name="p_type" placeholder="Product Type">
+        <input type="text" id="defaultContactFormName"  required class="form-control mb-4"name="p_invoice" placeholder="Product Invoice">
+        <input type="text" id="defaultContactFormName"  required class="form-control mb-4"name="p_price" placeholder="Product Price">
+        <input type="text" id="defaultContactFormName"  required class="form-control mb-4"name="p_qty" placeholder="Product Quantity">
+        <input type="text" id="defaultContactFormName" required class="form-control mb-4"name="p_rqty" placeholder="Product R.Quantity">
+        <textarea class="form-control mb-4" required name="p_desc"id="exampleFormControlTextarea5" rows="3"placeholder="p_desc"></textarea>
+        <input type="date" id="defaultContactFormName" required class="form-control mb-4"name="p_date" placeholder="Product date">
+       
+
+    
+        <!-- Send button -->
+        <button class="btn btn-info btn-block" type="submit">Add Product</button>
+    
+    </form>
+
+</div>
+{%endblock%}

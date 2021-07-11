@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> User Registration </title>
+	<style>
+		.errorlist
+		{
+			list-style-type: none;
+			color:red;
+			margin-left: -5%;
+		}
+		.navbar-custom{
+			background-color: #4f868c!important;
+		  }
+		   #messages
+		   {
+			 margin-left: 40%;
+		   }
+		   #login-btn
+		   {
+			
+			
+			 background-color: #4f868c;
+			 height: 40px;
+			 border-color:darkblue;
+	  
+		   }
+		  
+			
+			 
+		   .bg-dark
+		   {
+			background-color: #4f868c!important;
+		   }
+			 
+		 
+		 
+			
+		  .navbar-brand{
+			  margin-left: 30%;
+			  font-size: 60px;
+			  font-family: Arial;
+			  
+		  }
+		  .btn-dark
+		  {
+			  width: 60%;
+			  font-size: 25px;
+			  font-family: Arial, Helvetica, sans-serif;
+				 font-size: 50px;
+				 margin-top: 8%;
+	  
+		  }
+		  .navbar-brand
+		  {
+			  font-family: 'Times New Roman', Times, serif;
+			  
+			  color:white;
+			 
+	  
+			  
+	  
+		  }
+		  .btm-bar
+    {
+      align-content: center;
+      color:white;
+      font-family: 'Times New Roman', Times, serif;
+      
+    }
+
+
+    #top-bar
+    {
+      color:white;
+      align-content: center;
+
+    }
+	#con{
+		position: relative;
+		margin-left: 35%;
+		min-width : 321px;
+	}
+
+
+	</style>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<nav class="navbar navbar-custom">
+
+	<div class="container " id='top-bar'>
+	   <!-- Brand and toggle get grouped for better mobile display -->
+   <h1 id='con'>Welcome to Easy files</h1>
+	 </div>
+	 <!-- /.container-fluid -->
+   </nav>
+<br>  
+
+
+
+<div class="row justify-content-center">
+<div class="col-md-6">
+<div class="card">
+<header class="card-header">
+	<a href="{% url 'login' %}" class="float-right btn btn-outline-dark mt-1">Log in</a>
+	<h4 class="card-title mt-2">Sign up</h4>
+</header>
+
+<form method="POST" action="">
+	{% csrf_token%}
+	
+		<div class="col form-group">
+			{{form.as_p}}
+			
+		</div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" id='login-btn'> Register  </button>
+    </div> <!-- form-group// -->      
+                                 
+</form>
+<!--
+	print errors on bootom 
+{% if form.errors %}
+{% for error in field.errors %}
+<p class="error-message">
+	<strong>{{ error|escape }}</strong>
+</p>
+{% endfor %}
+{% endif %}-->
+<div class="border-top card-body text-center">Have an account? <a href="{% url 'login' %}">Log In</a></div>
+</div> <!-- card.// -->
+</div> <!-- col.//-->
+
+</div> <!-- row.//-->
+
+
+</div> 
+<!--container end.//-->
+
+<br><br>
+
+<nav class="navbar sticky-bottom navbar-custom ">
+	<div class="container  navbar-brand">
+	  <!-- Brand and toggle get grouped for better mobile display -->
+	 <div id='con' class ='btm-bar'> All RIghts are Reseved @2019-20 By Zohaib Yousaf</div>
+	</div>
+	<!-- /.container-fluid -->
+  </nav>
+	  
+
+</body>
+</html>

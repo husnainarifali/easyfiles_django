@@ -1,0 +1,195 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+   <style>
+    .navbar-custom{
+      background-color: #4f868c!important;
+      margin-left: 0%;
+      margin-right: 0%;
+    }
+     #messages
+     {
+       margin-left: 40%;
+     }
+     #login-btn
+     {
+      width: 400px;
+       
+       background-color: #4f868c;
+       height: 40px;
+       border-color:darkblue;
+
+     }
+     #user
+     {
+       width: 400px;
+       
+       height: 40px;
+      
+       
+       
+       
+     }
+     #pass
+     {
+      height: 40px; 
+       border-color: green;
+     }
+     #data-form{
+
+       margin-top: 2%;
+       border-width: 8px;
+      border-radius: 1px;
+       border-color: green;
+       
+       
+
+     }
+   
+       #wish{
+           font-family: Arial, Helvetica, sans-serif;
+           font-size: 50px;
+           margin-top: 5%;
+           color:darkgreen;
+       }
+    .navbar-brand{
+        margin-left: 30%;
+        font-size: 60px;
+        font-family: Arial;
+        
+    }
+    .btn-dark
+    {
+        width: 60%;
+        font-size: 25px;
+        font-family: Arial, Helvetica, sans-serif;
+           font-size: 50px;
+           margin-top: 8%;
+
+    }
+    .navbar-brand
+    {
+        font-family: 'Times New Roman', Times, serif;
+        margin-left: 70%;
+        color:white;
+       
+
+        
+
+    }
+    .btm-bar
+    {
+      align-items: center;
+      color:white;
+      font-family: 'Times New Roman', Times, serif;
+      
+    }
+
+
+    #top-bar
+    {
+      color:white;
+      align-content: center;
+
+    }
+    #con{
+		position: relative;
+		margin-left: 35%;
+	}
+
+   </style>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" href="https://c8.alamy.com/comp/FP6XE3/easy-icon-internet-button-on-white-background-FP6XE3.jpg" type="imagee">
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
+   
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Easy-Files</title>
+    
+
+  </head>
+  <body>
+      <!-- Image and text -->
+  
+  </nav>
+  <nav  class="navbar navbar-custom">
+
+   <div class="container " id='top-bar'>
+      <!-- Brand and toggle get grouped for better mobile display -->
+  <h1 class="text-center"id='con'>Welcome to Easy files</h1>
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+    <h1 class="text-center" id='wish'>{{wish}}</h1>
+    {% if messages %}
+    {% for message in messages %}
+    <ul class="messages">
+      <div class="mr-2 alert alert-{{message.tags}}" role="alert">
+          {{message}}
+        </div>
+        {% endfor %}	
+        {%endif%}
+        <p class="text-center mt-3" style='color:blue;'>Log in to your account</p>
+    <div class="d-flex justify-content-center form_container" id='data-form'>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3 text-center" id='user'>
+          <div class="input-group-append">
+            <span class="input-group-text">@<i class="fas fa-user"></i></span>
+          </div >
+
+          <input type="text" name="username" placeholder="Enter Username..." class="form-control">
+        </div>
+
+        <div class="input-group mb-3" id='pass'>
+          <div class="input-group-append">
+            <span class="input-group-text">P<i class="fas fa-key"></i></span>
+          </div >
+
+            <input type="password" name="password" placeholder=" Enter Password..." class="form-control">
+        </div>
+        <div class="form-group login-group-checkbox">
+          <input type="checkbox" id="lg_remember" name="lg_remember">
+          <label for="lg_remember">Remember Password</label>
+        </div>
+      
+          <div class="d-flex justify-content-center mt-3 login_container" >
+             <input class="btn login_btn" type="submit" value="Login" id='login-btn'>
+             </div>
+             
+            <p>forgot your password? <a href="{% url 'reset_password'%}">click here</a></p>
+        <p>New User? <a href="{% url 'register' %}">Create New Account</a></p>
+        
+      </form>
+    
+          
+    
+        
+          </div>
+          
+          
+      <nav  class="navbar sticky-top navbar-custom text-center ">
+        <div class="container  navbar-brand">
+          <!-- Brand and toggle get grouped for better mobile display -->
+         <div id='con' class ='btm-bar'> All RIghts are Reseved @2019-20 By Zohaib Yousaf</div>
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+          
+          
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta name="google-site-verification" content="7Okq718VWQ6FB9XrxFN3Q5_Nf5tePB8Fvv5AET2-HgE" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://c8.alamy.com/comp/FP6XE3/easy-icon-internet-button-on-white-background-FP6XE3.jpg" type="imagee">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Easy-Files</title>
+    <style>
+      .add-btn
+  {
+      background-color: #025058!important;
+      color: white;
+  }
+      .bg-dark{
+        background-color: #4f868c!important;
+      }
+      .thead-dark
+      {
+        background-color: #4f868c!important;
+      }
+      
+      button
+      {
+        background: none!important;
+      }
+      .log-btn:hover {
+      background-color: #008CBA;
+      color: white;
+}
+      #no-data
+      {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: oblique;
+        color: white;
+        margin-right:2%;
+        font-size: 20px;
+      
+      }
+      #current-user
+        {
+        color: white;
+        margin-right: 4%;
+        text-shadow: red;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: x-large;
+        
+      }
+       
+     .navbar-brand{
+         margin-left: 30%;
+         font-size: 20px;
+         font-family: 'Times New Roman', Times, serif;
+         
+     }
+     .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+      background-color: lightblue;
+      }
+    #navbarTogglerDemo01
+    {
+        font-family: 'Times New Roman', Times, serif;
+        margin-left: -40%;
+    }
+     .up-btn
+     {
+         margin-right: 1%;
+         
+     }
+     #reg-btn
+     {
+         font-family: 'Times New Roman', Times, serif;
+         width: 110px;
+         margin-right:15px;
+         
+     }
+     #log-btn
+     {
+         font-family: 'Times New Roman', Times, serif;
+         width: 110px;
+         background-color: white; 
+        
+          border: 2px solid #008CBA;
+     }
+     #ser-btn
+     {
+        
+         margin-top: 1%;
+         
+         margin-left: 50%;
+         
+     }
+     #input-btn
+     {
+         font-family: 'Times New Roman', Times, serif;
+     }
+     #se-btn
+     {
+         font-family: 'Times New Roman', Times, serif;
+         width: 85px;
+     }
+     #rqty
+     {
+       color:rgb(241, 8, 8);
+     }
+    
+     
+    </style>
+    <script type="text/javascript">
+      var user = '{{request.user}}'
+  
+      function getToken(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                  var cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken')
+
+      function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+  
+    </script>
+  
+
+
+
+
+
+
+
+
+  </head>
+  <body>
+
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-dark topbar mb-4 static-top shadow topbar">
+        <button class="navbar-toggler text-center" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
+          {% if request.user.is_superuser or request.user.is_staff  %}
+          <a class="navbar-brand" href="{% url 'dashboard' %}">Admin Dashboard</a>
+          
+          {% else %}
+          <a class="navbar-brand active" href="{% url 'userprofile' %}">My Account</a>
+          {% endif %}
+          
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'firmware' %}">Firmwares</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Mobiles Accessries</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'aboutus' %}">AboutUs<span class="sr-only"></span></a>
+              </li>
+              {% if request.user.is_superuser or request.user.is_staff  %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'userprofile' %}">My Account<span class="sr-only"></span></a>
+              </li>
+            {%endif%}
+          </ul>
+          
+            {% if request.user.is_authenticated %}
+             {% if request.user.get_full_name %}
+             <div id="current-user">
+              <h5>{{request.user.get_full_name}}</h5></div>
+              {% else %}
+            <div id="current-user">
+            <h5>{{request.user}}</h5>
+          </div>
+          {%endif%}
+          <a href="{% url 'logout' %}">
+            <button type="button" class="btn btn-dark bg-dark" id='log-btn' class="ml-2">Logout</button></a>
+            {% else %}
+            <p id='no-data'>Please Login For Farther Proces</p>
+            <div class="up-btn">
+              <a href="{% url 'login' %}">
+              <button type="button" class="btn btn-dark bg-dark" id='log-btn' class="ml-2"text='Login'>Login</button>
+          </div></a>
+            {% endif %}
+        
+       
+        </div>
+      </nav>
+   
+       
+      <nav class="navbar navbar-light bg-light ml=3 topbar mb-4 static-top shadow topbar " id="ser-btn">
+        
+        <form class="form-inline" method = "POST" action = "">
+          {% csrf_token %}
+          
+          <input name="Q" class="form-control mr-sm-2" type="search" placeholder="Search" >
+          <input id="se-btn" class="btn btn-outline-dark bg-dark my-2 my-sm-0" type="submit" value="Serach">
+        </form>
+        <a href="{% url 'home' %}">
+          <input  class="btn btn-outline-dark my-2 bg-dark my-sm-0 mr-3" type="submit" value="All Products"></a>
+          <div class="form-group">
+            
+      </nav>
+   
+     
+
+
+
+      
+     
+					
+		
+      <table class="table table-hover table-striped ml-3" data-click-to-select="true">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Model Name</th>
+            <th scope="col">Touch/Unit</th>
+            <th scope="col">Price</th>
+            
+            <th scope="col">Qty</th>
+            <th scope="col">R.Qty</th>
+            <th scope="col">Desc</th>
+            <th scope="col">Data</th>
+            <th scope="col">Oerder</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in product %}
+           
+          <tr> 
+          
+          
+              <th scope="row">
+              
+                {{ page_obj.start_index|add:forloop.counter0}}
+               
+              </th>
+              
+              <td>{{i.product_name}} <a class="badge badge-success">New</a></td>
+              <td>{{i.product_type}}</td>
+              <td>{{i.product_price}}</td>
+              <td>{{i.product_qty}}</td>
+              {% if i.product_rqty < 3 %}
+              <td id="rqty">{{i.product_rqty}}</td>
+              {%else%}
+
+              <td>{{i.product_rqty}}</td>
+              {% endif%}
+             
+              <td>{{i.desc}}</td>
+              <td>{{i.date}}</td>
+              <td>
+                
+                
+                <!-- Trigger the modal with a button -->
+        <button type="button" data-product="{{i.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" data-toggle="modal" data-target="#myModal">Order</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                
+                <h4 class="modal-title">Order information</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                Item was  successfuly added in Your Account Please Vist To shop For Geting Your Order thank You For Using Our Services 
+
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+                
+                
+                
+              </td>
+            </tr>
+         
+          {%endfor%}
+          
+        </tbody>
+        
+      </table>
+     
+      <nav aria-label="Page navigation example"  >
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+              
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if requests.POST.fet.Q%}&Q{{requests.POST.get.Q}}{%endif%}">Previous</a></li>
+          {% endif %}
+          {%for j in paginator.page_range%}
+       
+            <li class="page-item {% if j == page_number %} active {% endif %}">
+              <a class="page-link" href="?page={{ j }}">{{j}}</a></li>
+  
+          {%endfor%}
+                {% if page_obj.has_next %}
+                <li class="page-item >
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if requests.POST.fet.Q%}&Q{{requests.POST.get.Q}}{%endif%}">Next</a></li>
+                {% endif %}
+    
+        </ul>
+      </nav>
+         
+        
+      <br>
+      <br>
+      <br>
+      
+      
+     
+    <!-- Bottom Bar -->
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">All Rights are Reserved @2019-20 By Zohaib Yousaf</a>
+   
+    </nav>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="/static/js/user.js"></script>
+  </body>
+</html>

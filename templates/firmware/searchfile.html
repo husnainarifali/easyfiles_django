@@ -1,0 +1,39 @@
+{% extends 'firmware/base.html'%} {%block style%}
+<style>
+    .img {
+        width: 100%;
+    }
+    
+    .file-labels {
+        margin-left: 10%;
+        align-content: center;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    
+    .card {
+        color: rgb(255, 241, 241);
+    }
+</style>
+
+{%endblock%} {%block contant%} 
+{% ifequal 0 counter%}
+<h4 class="postsby ml-5">
+    <span class='text-danger'>Search Results:</span> {{counter}} </h4>
+<small class='ml-5'>Firmware not Found Please Check File Name</small>    
+{%else%}
+<h4 class="postsby ml-5">
+    <span class='text-success'>Search Results:</span> {{counter}} </h4>
+{%endifequal%}    
+<div class="border">
+{% for file in files%}
+<div class="card  ml-5 mr-5 bg-light border text-dark" style="border:green">
+    <h5 class="card-header">{{file.model.catagory}}</h5>
+    <div class="card-body">
+        <h5 class="card-title">{{file.detailFileName}}</h5>
+        <p class="card-text">{{file.desc}}</p>
+        <a href="{% url 'download' file.id %}" class="btn btn-dark">Download</a>
+    </div>
+</div>
+<br> {%endfor%}</div>
+<div></div>
+{%endblock%}

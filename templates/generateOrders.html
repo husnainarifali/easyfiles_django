@@ -1,0 +1,99 @@
+{%extends 'base.html'%}
+{%block script%}
+
+
+   
+   <script>
+    function myfunction(){
+      var values = new Array();
+
+      $.each($("input[name='chk']:checked").closest("td").siblings("td"),
+             function () {
+                
+                  values.push($(this).text());
+                  
+             });
+      
+         alert(values);
+    
+  }
+  $("#checkAll").change(function () {
+    $("input:checkbox").prop('checked', $(this).prop("checked"));
+});
+  </script>
+{%endblock%}
+{%block mystyle%}
+
+<style>
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: lightblue;
+    }
+
+</style>
+{%endblock%}
+{%block content%}
+<div id="log"></div>
+<div class="container px-3 my-5 clearfix ">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Orders List</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table id='div_func' class="table table-bordered m-0 table-hover table-striped table-bordered">
+                <thead class="thead-dark "data-checkbox-header  data-checkbox-header="false"
+                data-click-to-select="true">
+                  <tr>
+                    <!-- Set columns width -->
+                    <th class="text-center py-3 px-4" >Product Name&amp; Details</th>
+                    <th class="text-center py-3 px-4" >Product Type</th>
+                   
+                    <th class="text-center py-3 px-1" >Description</th>
+                    <th class="text-center py-3 px-2" >Quantity</th>
+                    
+                    <th class="text-center align-middle py-3 px-0" ><a href="#"  class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"><input type="checkbox" id="checkAll"/></i></a>Selection</th>
+                   
+                  </tr>
+                </thead>
+                <tbody id='items'>
+        
+{%for i in summery%}
+<form method="POST" action="">
+
+                  <tr>
+                    <td >
+                     
+                          <a href="#" class="d-block text-dark "id='p' ></a>{{i.product_name}} 
+                      
+                   
+                    </td >
+                    <td> <a href="#" id='p'class="d-block text-dark" id='type'></a>{{i.product_type}} </td>
+                    <td  class="d-block text-dark"> <input type="text" id='d' class="form-control text-center" placeholder="Description"> </td>
+                    <td class="align-middle p-2" ><input type="number" id='n' class="form-control text-center" value="5"></td>
+                   <td class="text-center align-middle px-0 "><a href="#">
+                    <div class="checkbox" id='checkbox'>
+                      <label><input type="checkbox"   name="chk" >Confirm</label>
+                    </div>
+                  </a></td>
+                    
+                  </tr>
+                
+                </form>
+
+
+
+{%endfor%}
+</tbody>
+</table>
+</div>
+<div class="float-right">
+    <button type="button" class="btn btn-lg btn-danger md-btn-flat mt-2 mr-3">Cancel Order</button>
+
+    <button type="button" class="btn btn-lg btn-success mt-2" onclick="myfunction();">Orders Confirm</button>
+  </div>
+
+</div>
+</div>
+</div>
+{%endblock%}

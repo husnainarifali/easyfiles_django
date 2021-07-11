@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="7Okq718VWQ6FB9XrxFN3Q5_Nf5tePB8Fvv5AET2-HgE" />
+    <!-- Required meta tags -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script data-ad-client="ca-pub-6698289172764797" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta charset="utf-8">
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://c8.alamy.com/comp/FP6XE3/easy-icon-internet-button-on-white-background-FP6XE3.jpg" type="imagee">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="google-site-verification" content="7Okq718VWQ6FB9XrxFN3Q5_Nf5tePB8Fvv5AET2-HgE" />
+
+    <title>EasyFiles</title>
+    <style>
+        .add-btn {
+            background-color: #025058!important;
+            color: white;
+        }
+        
+        .bg-dark {
+            background-color: #4f868c!important;
+        }
+        
+        .thead-dark {
+            background-color: #4f868c!important;
+        }
+        
+        button {
+            background: none!important;
+        }
+        
+        .log-btn:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+        
+        #no-data {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: oblique;
+            color: white;
+            margin-right: 2%;
+            font-size: 20px;
+        }
+        
+        #current-user {
+            color: white;
+            margin-right: 4%;
+            text-shadow: red;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: x-large;
+        }
+        
+        .navbar-brand {
+            margin-left: 30%;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .table-hover tbody tr:hover td,
+        .table-hover tbody tr:hover th {
+            background-color: lightblue;
+        }
+        
+        #navbarTogglerDemo01 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-left: -40%;
+        }
+        
+        .up-btn {
+            margin-right: 1%;
+        }
+        
+        #reg-btn {
+            font-family: 'Times New Roman', Times, serif;
+            width: 110px;
+            margin-right: 15px;
+        }
+        
+        #log-btn {
+            font-family: 'Times New Roman', Times, serif;
+            width: 110px;
+            background-color: white;
+            border: 2px solid #008CBA;
+        }
+        
+        #ser-btn {
+            margin-top: 1%;
+            margin-left: 50%;
+        }
+        
+        #input-btn {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        #se-btn {
+            font-family: 'Times New Roman', Times, serif;
+            width: 85px;
+        }
+        
+        #rqty {
+            color: rgb(241, 8, 8);
+        }
+        
+        #head {
+            color: gray!important;
+        }
+        
+        .a {
+            color: white : !important;
+            
+        }
+        
+        .image {
+            width: 25%;
+            height: 20%;
+        }
+        .progress {
+       
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        }
+    </style>
+    {%block style%} {%endblock%}
+    {%block script%} {%endblock%}
+</head>
+
+<body>
+    <amp-auto-ads type="adsense"
+    data-ad-client="ca-pub-6698289172764797">
+</amp-auto-ads>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark topbar static-top shadow topbar" style="width:100%">
+        <button class="navbar-toggler text-center" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon text-center"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
+            {% if request.user.is_superuser or request.user.is_staff %}
+            <a class="navbar-brand" href="{% url 'dashboard' %}">Admin Dashboard</a>
+            
+            {% else %}
+            <a class="navbar-brand active" href="{% url 'userprofile' %}">My Account</a> {% endif %}
+
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                {% if request.user.is_superuser or request.user.is_staff %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'allUsers' %}">All Users<span class="sr-only"></span></a>
+                </li>
+                {% endif %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'firmware' %}">Firmwares</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Mobiles Accessries</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'aboutus' %}">AboutUs<span class="sr-only"></span></a>
+                </li>
+                {% if request.user.is_superuser or request.user.is_staff %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'userprofile' %}">My Account<span class="sr-only"></span></a>
+                </li>
+                {%endif%}
+            </ul>
+
+            {% if request.user.is_authenticated %} {% if request.user.get_full_name %}
+            <div id="current-user">
+                <h5>{{request.user.get_full_name}}</h5>
+            </div>
+            {% else %}
+            <div id="current-user">
+                <h5>{{request.user}}</h5>
+            </div>
+            {%endif%}
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-dark bg-dark" id='log-btn' class="ml-2">Logout</button></a>
+            {% else %}
+            <p id='no-data'>Please Login For Farther Proces</p>
+            <div class="up-btn">
+                <a href="{% url 'login' %}">
+                    <button type="button" class="btn btn-dark bg-dark" id='log-btn' class="ml-2" text='Login'>Login</button>
+            </div>
+            </a>
+            {% endif %}
+
+
+        </div>
+    </nav>
+
+    <header id="head" class=" mt-2 no-padding-bottom header-alt d-flex bg-light justify-content-cente">
+
+        <div class="container no-padding">
+
+            <div class="logo mt-2 ">
+                <a href="{% url 'firmware'%}">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQAB
+                        AAD/2wCEAAwICRcVExgWFhYaGBgZHR0dGhoaHh0eHiAaIB0iIh8fHy4lK
+                        jkvJyc1KR0eMkYxNTs+QUJBJS5JT0g/TjlAQT4BDQ4OExESHRUVHT4nHy
+                        Y+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pko+Pj5KPj4+Pj4+Pj4+Pj4+Sko
+                        +Pj4+Pj4+Pv/AABEIAJ8BPQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAA
+                        AAAAAAAABQ
+                        YBBAcDAv/EAEoQAAIBAgQCBgUHCAgFBQAAAAECAAMRBBIhMQVBBhMiUWF
+                        xMnKBkbEHFDM0QqGyI1JiksHC0eEWNVNUc4KDtBckQ7PwFSWT4vH/xAAZ
+                        AQEAAwEBAAAAAAAAAAAAAA
+                        AAAQIDBAX/xAAlEQACAgMBAAIBBAMAAAAAAAAAAQIRAxIhMTNBMhMiYYE
+                        EQlH/2gAMAwEAAhEDEQA/AOqxEQBERAEREAxE18fjEo0nqubKgLE+AnMe
+                        L8YxWNGc1Fo0WJCUzVVLgWve5BY6jw1kqLfhVyS9Oq3mZxWhh61NgyYmk
+                        jDYriEB+4y/dEukb1ajYbE269BcMLWdbA8tL2IOm48pLg0rIU0+FtiIlS
+                        4iIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAk
+                        Vx/jdPB0esfUnREG7N3Dw7zykpOafKGzVMfSok2UKoF9gXY3P3D3SYq3RVulZpYnpnj6zEo2RfzaaA28yQTN3hHTrEUnC4tS9M7tlyuPEWs
+                        GA7rX8ZmjwxUD0KVR0OrF8wN2Cj0gVtb2yt47EvUoUy7FyGqKCe4BNvDUzd40kYrI2+F++UHFhuHI1M5kqVKeo2KlWYfeBKHXpM2Fw+VWazVb5QTbVe6XDotg/nvCamHY2yuwRjyIsy+wE+4yr4R2wVYpiRWXIT+SQ2U3Fr7i45giVhXjLTvjRFHCVP7N/1T/CT2Hdl4vRK6HPSHsKqCPcTPbFdIaDoyqldGI0dW1B7x25vdA+BvUr/O6obItzTL7uxFg2vIDn3+UtKkvSsbb6i1cf6QrhuwoDVCL2OwB5tK1/S3FZr5l8sot/H75q18QzVMRUJ7RO+ht2rc/Cwnxg67u4W5udtB3E90mONV0iU3fC38A6SLiD1bgJU5W9FvK+t/CWCc1qu9OojNo6PpsdLKeXmffOkjaZZI6vhpjk2un1ERMzUREQBERAER
+                        EAREQBERAEREAREQBERAEREAREQBERAEREAxESC6XccODw5ZLGoxypfYNa5Y94A1tAZOMwG5tKR8o3BGqBMVSBYoMrganLe4YeRJv4Sk13rVj1lWqSWIsXYm5OwAF8o9gEmejHSKtha6UazFqLkKVZs2W5sGU66X3Hn3TTVrpm5J8I/D8aY0XSrVqm4Ki2UgqRYg31075rVQrinRoCo7ZmNmAuWbKAFty7O5nUsb0SwdZszUQGOpKFkv55SBHR/hNHDtWWnTVWR7Bt2ylFYC51t2iPZJeThVQpjorgFwuHSgWU1dWdQQSGbU+NhoJ6cYwVPE1EovTVgvbckahRoqg7i5vtyUytcP6L104q1U1FKqxqlrnMVdmAU+629rAS34f61W9Sj8akzftmv8FbxeC4bg6llw2eoNct2qW7ic5IEleFdJqNZhTsabHRQ1
+                        rHwFufhKnTdjiapa+csQe0VN8xAGgt4a6TGOp3XrF9NbG9rEgkgXtzBUjTwm/6acbMP1GpEhx3h/zetUZqZejV10JAVr3sbePxkbRx1JGDLQII27RPxnRqaZqahwDcDMCNL213kVguCYd1ztRUksx52tmNudtrSqy0qZMsVu0QHC8KcZWRhTKojZnYkkM2lgL+qNperyB6R8T+aUlWkArNotgLKBue6VBiz5WfENmYZjfMSATpsfhFPI7FrGqOmxKh0b404r/NqrGoDcI53BHI87Ed8t8ykmnTNYyTVozERILCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIBiU35TMGz4enUHo037fgrC1z4A298uUhuL8fwlG9OvUW5FmSxc2OhzAA6eclekPw59TwuFyofnKt6NwbLbLfXXXY2t3ATXr8OR69GlQrCqzEKbDbtXLE7cyT3SdodG+HYyofmuJKE69XbUD9ENY298sfDuiVDDJeiSKwN1qubsCOWlhlOoIG4M1c1V
+                        UYqDu7ITjeN4gnEkSlmFIsi0wAMjDKC2bTfRr91tJbqXZxbjk9NGHmrMD9zLNbEVzVpFspFWg6sybkFSC2XvBTNY87+YntjDcJiaXbyg3A1zUmsTbxGUEeRHOZGyR6L9bbxor9zt/GMP9arepR+NSeOLqAZMUhzIFs9tb0msQw8QbHyJ8J94ymyt19PtGwDoPtoLkEfpC5I77kd1oBGdIeAhxUrU3KNlLOBs2UXvpsdN588L6K9W4arUL2IIQXC3BuL662OslK9cV1NOmbrUXtPyCuNLd5INwOW5mnR6Q5sYcN1ZABYZ78wLkkW29vdL7SqkUajdk47WBPcCfdKvxyriEoYcUSwBAzlBc3IBA77byexrk/kl9Jwbn81dix9+g5n2z4axqoo9GkCzdwNrKD7CT7pVcLNWVXpPQqmjh6tUdoKVfwJOl+6/wAZF5GyplRmBUWtsfA+4S+mkMR2nF6WuVTs36Z8O4e3utE4joth1u3WuiDX0hlHlcTaE0lTMpwbdkHwTDF8etgewxZvAD+dhOhSv8Mx2BoDJSqKCd2N7sfEkayeVgRcG4Oxmc3bsvBJKj7iIlDQREQBERAEREAREQBERAEREAREQBERAEREAREQBERAIDplxdsLhGdDZ3IRD3E3u3sAJnO+C8COJBq1KmRCxF9CzNud/PeXv5Q
+                        eHmtgiygk0mDkD80AhvcDf2SncB4hg0ohayDPc3Zlzg3OltDYWtpptNsST9MMraXD74j0XNFDWoVWzJ2tbBhbW6kcxbuk1WwVbi+Bw7rVVHQlXDXyswsM2nPQEeZ2lXxnHfyVSjRDKjOctze1MgAqO4XBPkbS4dH8HSwmApviar0c5LW6yogBbYWUjWwBOknJX0Md/ZKIlRCikj5wigK9zlroBqrcwdzbWxNxcEieuGxIpnrF0oOxDqdDRq3sb9wJ0PcTfYmfFbKEAaoamHYhqdXNdqTHVWJ1JF9idr2NwdPnOyu+ZQz5fyqAaVqQFusT9IDQj2dxmJsbi/kKuQ/RVScnctQ3JQ+DakeNxzEzgR1THDn0QC1En+z2Keak28iPGa+HylBRZs9GoPyFS/LcJf8AOG4O5A7wZ9FXqIaZIGIoEMrcm3Cv5MLgjkb9wMAxwBgKVybAU6JJPK1Jb3nqjAFsQUsXAVFtZiBe1+4m/sAF+c0eEIWprmIWmtOizXO5FIGx8Ba575Idb/1nBudKSc9f2n7h7YIM6oLCzV6mpPIAc/VAOg5nxJni2XKVuTTU9o7mrUJ9Ed4voe/bYGG0z3azaGs45DlSXx189b7kQlwVOUdZa1Knypra2Zrc7b+4c4B71cM9ZCtU5UYWKJvY8mY7+wD2yicaxHb6hb9VRJ
+                        VVJvcg6sfEm/kJeUpUy+RqzNUtmIFRgbd4UHQSmcQ4f1WLdXYopzMjk7g6jfnrbzmmP2jPJ5ZG08MxIG1+WlwP/NpY+iHEGSs2Ga+U5sgbcEa29ov7prBKAAGZTlJYEsL5ri1+/nPbo7hjUx71BqlMscw2JIIAHvJ9k1yJKPTLG3twu8zETlOsREQBERAEREAREQBERAEREAREQBERAEREAREQBERAMSpcU6A4eq5amzUSdSqgFb94B29ht4S2zMJtENJlT4R0Fw+HcVHLVmXVc4AUEbGw3PmZpdJuOYLEA0GStWFNsxegNFYXBsTodCRtaT/S6qy4DEFL5sh23sTZj7iZWeHKqYWj1ZspUFiuhLEC9zY876G3nNYQ2fWZTnpxImeCnC16QOCyo1MBSCLG1rZao3ZT3+0G8ZwoyNdFRgQd2w7G4B/SpHUA7AXB8IPAhqfFkFEKjPSPWC5K2CkgtYA30H3SzY8OCGq5FsCFrKCQpO61Qd6Z5m9h4aGVkqdF4u1Z4MQudagyqSDWVSewxOlelzyk6nuOvI392Z2sNPnFEEodlq0zofYbC/cbHbfSuVsrdgp6J36q+lv0qDbX5aA2sLfdL7KaoytZDv1NQg2Q/nUnF7Ha2mhAtBJ98IF6SliFpLTos1+ZFMWB8Ba/ibe3cq1WLFj2Wykrm2pU+bt+kbHTwtyM0OGk9WhNj+To5E2UuKQOZj3AC/8AO02c3O+a/aG
+                        bQMR/1H/NQchzt5QQeinLl02BKI5276tXu5n+Z0+8Ph8wLN6BOZi2hqEfabuQch7T4+SAki4LsxDBW0LW2qVPzVHJbctidtTpZiaooBSqqrsFJViTbU21A3tCVug3Ss+DxXAU6/WKCXAy5kU5bbacifISVqUcPjqQOjryYaFT8QfAyrnAU1upphyPtAkD/NroZs9H70cd1ansuhLAejcC4I+Htms8equzKGXZ00bi9C6Wa5qVCO7sg++0n8Fg0ooEpqFUd3PxPeZsTMxbb9NkkvBERILCIiAIiIAiIgCIiAIiIAiIgCJiZgCIiAIiIAiIgCIiAIiIB51KYZSrAEEEEHYg7gyn1ehdVCwwmLNOmxN6bqHAvvllziSpNeEOKfpWuGcHpcNpVcRUdqj5SXqNvYfZXzNvukR/TWvcs1Cn1X2kBYvl56kZSbcvMS4cWwIxGHqUWNhUUi45HkfeBKKOiuLYmm1NFvoauYWtr2gN79o6eO8uqd2UlapIsdSkoppVpkmgVDIw1akGA0sfSpkWBU7ezTVpJd6YItkqKAATpasUdB+dTuoIB1G3hNvHcGShhSKP5MogViBo6iwIYbEm1wdwfMg+FL6T/Wb/AHjyqLMxhwOpQkXy00a2tjbDggNbcd45zeSmzOVHabMTdtrqbdY9twCLBRpp7Ro4f6uv+Cv+3EkMPQz1WBJC9vMB9r8q1gedu8c/fBVGpxTiDUHFCiQarjO9R9fAeF9NtgLTQfGVauXD4oqRUNkdRYq4tYnSxFyB7ZtdIODOtQVsPTVuzlamAPeBz/lNbhnDa9avTerT6tKbZtRYkixAsfEDWarXW/sze21fR4VuFcQRsq3c
+                        cmUpY+OtiPbNrqm4fRfGVx1lTsqFBAAUsBva19uUuErfygf1fU9an+MSm7lxl3BRTaIf/iQP7qf/AJB/CP8AiQP7sf1x/CUKS+A6M4uvSWrSpZla9jmQXsSDuQdxJcUjFTm/DqvCcb1+Hp1rZc6hst72vKnU+URQzAYckAkA5wLgG19pYeF02w/D0WoMr0qRzC4Niqk8tJyBRpIjFNs0yTaSovo+UYf3Y/rj+EtXBOJDE4dKwGXPfs3vYhiD8Jxq06X8nVfNg2X8yow9hAb94xKKStEY8jbpknx3pBSwajPdnb0UXc+PgPEyrVPlAq37NBAOWZiTbx2kL0urF8fXJPokKPBQoFvfc+2eXAuFfOXdc2XJTZ9r3IsAPvkqKq2UlkltSLXgOnqsQK1IoD9pDmA8xa/uvJvjXHBh6CV0TrUYgXBsLEEhtjpp985SsvHBKBxHB6tPcqXy+BFnUe+HFLpMMknaPr/iAP7uf1x/CTXSDj64RabZM/WXsAbaAA32PeJy4Sd6SY3rFwo7sOpPmSQfwyXBWiqyunbJ/D9N87oi4c3dgo7Y3JAHLxlvnNehWD6zGKxGlNSx89h95v7J0uUmknSNsTbjbKtxPpgKFZ6XUlshtfNa+gPd4zW/p4P7uf1/5SvdJvrtf1v3RNPB4R61RadMZma9hcDYXO5tsDNFBVbOd5Z7NJl74N0pGJrCkKRS4Jvmvt7JpHp0P7A/rj+E8ujPAcRQxAqVUyqFYXzKdTtsSZU23PmZCjFt0WlknGKv06LwHj/ztnHVlMgB9K97kju8JGnpwASOoOhI9L+U1/k/+kreqvxMq9T0m8z8ZKgtmhLLJQTs6HwDpB87d16splAN8173Nu4SQ4tjeooPVtmy20va9yB+2VToB9LV9UfiMsHSv6lV8l/GJm0lKjWE28dv0h/6cD+wP6w/hM/03H9gf1h/CU4SSwXBK9ZA9NMykkXzKNRodzeauEV6c0cuSXEdB4VjOvopVtlzA6XvaxI/ZNyRvAMM1LDU0cZWUG4uDa7E8tOckpgzujdKzMREgsIiIAiIgGhxv6tU9UyDpfS/6zf7x5Ocb+rVPVMhKQPWf6zf7x5KKsxh/q6/4K/7cSX4d9K/+f8A7ryKoL/y6/4K/wC3EleHfTP/AJ/+60l+EL0k5mIlS5iVzp//AFfU9ZPxiWOVzp9/V9T1qf4xJj6is/xZyq0uvR3plRwuFp0Wp1WZL3KhLG7E6XYHn3SmWkng+jmKr0xUpUSyNezBkF7Eg7kHcHlN5JNdOODafDo3HsaH4ZUqi6ipR
+                        BF7XAqAAeF+1OTzonSktS4RTpsMrEUUYaaMACRpp9kic6baVguF8rtqzd4nQyVcvclI++kh+JMt/wAmdb6wnqMPbcH4CQXTGkExVhYjqqe2uy2/dm58nlfLjCv59Mj2gg/AGTLsSIcmanTLCGnjqpI0ch1PeCAD7iCPZNDhWPbD1c663BV1NwCp3U21HnytOncc4ZQxSZKpAZfRYEBlP/nKc44vwSphm1s6E9l1II/zcwZEWmqYyRalaLNwTAcNxQyrTZHtrTao9/8ALrYjylr4bwylhkKUgVUkkgknUgDmfATkFNipDKSrA3BBsQRta06f0R4scTh7ub1EOVz36AhvaD77ys00XxTTdV057xjCdTiKtO2iscvqk3H3ETwqVS2W/wBlQo8gSf2mWX5QMJlxCVQNKi2PrKQPgw90q81i7VnPkVSaL78n2Ey0Xqkau1h6qj+JaWwzR4LhOpw9OnzVRf1jqfvJm9Odu3Z3QVRSOWdJ/rtf1v3RPjgeOXD4harBmVb3C2vqpHMjvn30n+u1/W/dE08JhXquEprmdr2FwL2BJ3IGwM6FWvTgbam2v+nROD9IqeKdkRHUquYlstrXA0sT3znDbnzMuPRDhFehWc1aZRSlgSym5zA8iZT23PmZWFJujTK24xb9LV8n/wBJW9VfiZV6npN5n4y0/J/9JW9VfiZV6npHzPxlo/kyk/jiWfoB9NV9RfxGWDpX9Sq+Q/EJX+gH0tX1R+IywdK/qVXyH4hMpfmdEPh/o5uJZ+A9JKeHoCmyOxBY3XLbU35kSsib+D4NXrJnp0y6kkXzKNRodyDN5JNdOTG5J/t9Oj4LEirSWoAQHAYA72PfNiaPB6LJh6SMMrKoBGhsRvtpN6cr9PSV0rMxESCwiJrYzG06K5qrqi97ED3d5gGxPh6gUEkgAbk6D2yAx3SMi3VrlDei9QHM3+FTHbf22HjIbGY92qKrZ3rE3SipU1fWa3YogeALW5iSkVbLNj8fTam630K6tsADsdeXcdjI5sSqFmY2CE1H8AahqAHxOYADc72ErtTE1DWTD0StTFFiSVuaNA8yt9XqDm51Gtt5H9J8WqFcFRYsqG9Wpe7VK50Jbvt8T4SyRVtl0RwFCHRhSRrb9k08pI77Eajum5hsSquWvcMCdLHQsTcd4138JCdKqjUMRh6iGxVLDuOU6jyIaYxNUIi10BbDVDdlU2ajUO5QjbXlsducmrRF0y30q6tsQedudp6ynmvkCsWBpk9isoOUMdxUUWKN3lSL8wZIUuK1EyhrMG9HMws3qOBZvIgHxlXEupFgld6e/wBXv6yfjElcNxKm7Zbl
+                        X/s6gyt7L7jxF5E9PT/7fUv+dT/GJC9RE3+1nLbTonRLj2Go4KnTq1lR1zXU3uLsSOXcZzvMO8e+ZzDvHvmzVo5IScXaLz0/4ilXD4c0mDo7uwIvY5BY+4tKOBJHiFcHDYRbjsrVO/51Uj90TQoAM6rcdpgu/eQISpCb2dnyPCTHROrkx1A97Ff1lI+JElflFoqleiQAoamRoANm/wDtK1ga4StTa47Lo
+                        2/cwP7JN2iK1lRJdLUtxCvcc1+9FM3eglJWxLqyqVakwIIBBGZZJdN+BO1T
+                        5zSUspADhRdhYaN4i1h4WlOp1CpOUlTqDYkG3MaSFTRMrjO2GUAkDYE28uU
+                        u3ybk5cQOV6fvIa/wEpVCkzsFQF2OyqLn7p0zojwk4agQ+ju2ZhvbSwHnaJ
+                        tVROFPayM+Ub0KHrN+ESlUfSXzHxl0+UY9ih6zfhEpVFhnXUekPiIh+Iy/I
+                        dnEQImB2nLek312v637onv0O+vUv8/4Gmv0mYfPa+o9L90T36HEfPqWo+3+
+                        Bp0f6nnr5P7OlttOPtufMzsDbGceZhc6jc/GUxfZr/k/RbPk/wDpK3qr8TK
+                        tU9JvM/GWj5PyOsra/ZX4mVaowzNqNz8ZpH8mZS+OJYOh2Op0KlQ1XCBlAF
+                        76kHWWDj2Op1sDWNJwwFgSL6HMDOfBh3iWLhpH/peJ1+2v7krKKuy2Ob1ca
+                        +iAEufRfi9ClhlWpUVWuxsb3sT5SmBh3iAw7xLySaoxhJwdo6vhMWlVc1Ng
+                        y3IuO8bz3kD0KP8Ayg9ZvjJ6cz46PSi7imZnhicQKaliGa3JFLMfIAT3iQW
+                        K1V4hja4bqqJwtMXvUqKXqkfoUxz85FYfh9d3Zkp1EK+lisUpqViOfU07WX
+                        wsJeYkkUc+TB4p6ppYajVo5/pMZiAeuYc7E+iO4DXynhxHCV8OjYfA4at2t
+                        KuIKnPUPMKbaDx//Z0iIsjUpGD4TU4dgWalSapi6oAOQE5Li9tBsPvNpVeG
+                        dHsWcTSL4eqF6xC7MptbMCSb+2dimIUmNUVfppgHqikaaFypYHKCbA23t5T
+                        U6NUa6M1GrRfqagIOZTYNbfyP8Jc4k7OqI0V2Uc8PxGDrMtKm1ai+62JBU8
+                        j3Ed82qnDatNOsw6FqT/SYWopNu/Lf9n3y3xGzGiKnSwVR6fYpHKNTh8QDY
+                        f4TnUTYwPzhRekHsN6OIB09Rxv7byxzydSTcMQBuLDWNidTVwOPNTRqNSmw
+                        3DKSPYw0m/aIlSaFotMxBJi0WmYgGLTVrcPpObvSRj3sqk/eJtzEENWeVHD
+                        Igsiqg/RAHwntEQSYtFpmIAiIgGLRaZiAYtFpmIBi0ATMQDFotMxAMWi0zE
+                        AxaZiIB//Z" alt="Halab Tech Support" />
+                </a>
+
+
+
+
+                <div class="col-md-6 hidden-sm hidden-xs top-search-holder no-margin">
+                    <div class="search-area-top">
+                        <p class="text-black">Phone / Whatsapp <i class="fa fa-phone fw-r10 fw-l-5"></i> <b>+447907458634</b></p>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="container">
+                <h2>Downlod Status</h2>
+                {% if downPercent <= 80%}
+                <div class="progress" style="height:30px">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" style="width:{{downPercent}}%;height:30px"></div>
+                  </div>
+              </div>
+              {%else%}
+              <div class="progress" style="height:30px">
+                <div class="progress-bar progress-bar-striped bg-danger" style="width:{{downPercent}}%;height:30px"></div>
+              </div>
+          </div>
+              {%endif%}
+              
+            <div class="search-form-group form-group">
+                <form class="text-center border border-light p-5" method="GET" action="/singlefile" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="input-group input-group-lg">
+                        <input type="hidden" name="a" value="downloads">
+                        <input type="hidden" name="b" value="search">
+                        <input list="product-list" name="keyword" type="text" class="form-control search-block-input" placeholder="Search Keyword" aria-label="Search Keyword">
+                        
+                        <span class="input-group-btn">
+                        <input style="width: 100px;height: 50px;"  class="  btn btn-dark bg-dark " type="submit">
+                    </span>
+                    </div>
+                </form>
+            </div>
+
+
+    </header>
+
+    <div class="container-fluid mt-3">
+        <ul class="nav  nav-fill  border">
+            {%for i in catagories%}
+            <li class="nav-item border">
+                <a class="nav-link active text-info" href="{% url 'searchfile' i.id %}">{{i.catagoryname}}</a>
+            </li>
+            {%endfor%}
+
+        </ul>
+    </div>
+    <br>
+    <br>
+    {%block contant%} {%endblock%}
+    <br> 
+    <br>
+    <br><br>
+    <br>
+    <nav class="navbar sticky-top navbar-dark bg-dark" >
+        <a class="navbar-brand" href="#">All Rights are Reserved @2019-20 By Zohaib Yousaf</a>
+
+    </nav>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

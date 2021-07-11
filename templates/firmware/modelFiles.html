@@ -1,0 +1,32 @@
+{% extends 'firmware/base.html'%} {%block style%}
+<style>
+    .img {
+        width: 100%;
+    }
+    
+    .file-labels {
+        margin-left: 10%;
+        align-content: center;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    
+    .card {
+        color: white;
+    }
+</style>
+{%endblock%} {%block contant%}
+<div></div>
+{% for file in files%}
+<div class="card col-md-11 ml-5 bg-light text-dark  " style="border:black">
+    <h5 class="card-header ">{{file.model}}</h5>
+    <div class="card-body ">
+        <h5 class="card-title">{{file.detailFileName}}</h5>
+        <p class="card-text">{{file.desc}}</p>
+        <a href="{% url 'download' file.id %}" class="btn btn-dark ">Download</a>
+        <img src="https://support.halabtech.com/templates/default-downloads/html/en/assets/images/defaults/file_thumbnail.png" class="img-responsive">
+
+    </div>
+</div>
+<br> {%endfor%}
+<div></div>
+{%endblock%}

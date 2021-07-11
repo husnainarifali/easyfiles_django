@@ -1,0 +1,319 @@
+{%load static%}
+<html>
+    <title>Easy-Files</title>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="https://c8.alamy.com/comp/FP6XE3/easy-icon-internet-button-on-white-background-FP6XE3.jpg" type="imagee">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
+
+
+	<style> 
+  #del{
+    color: white;
+
+  }
+  .add-btn
+  {
+    background-color: #025058!important;
+    color: white;
+  }
+        #no-data
+      {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: oblique;
+        color: white;
+        margin-right:2%;
+        font-size: 20px;
+      
+      }
+      #current-user
+      {
+        
+        font-style: oblique;
+        
+        margin-right:2%;
+        font-size: 20px;
+        margin-right: 4%;
+      
+        font-family: 'Times New Roman', Times, serif;
+        
+  
+      
+    }
+    #current-user1{
+      color: white;
+    }
+
+
+    .btm-bar{
+      margin-left: 30%;
+      font-size: 20px;
+      font-family: 'Times New Roman', Times, serif;
+      
+  }
+
+
+    </style>
+    <script type="text/javascript">
+      var user = '{{request.user}}'
+  
+      function getToken(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                  var cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken')
+  
+      function getCookie(name) {
+          // Split cookie string and get all individual name=value pairs in an array
+          var cookieArr = document.cookie.split(";");
+  
+          // Loop through the array elements
+          for(var i = 0; i < cookieArr.length; i++) {
+              var cookiePair = cookieArr[i].split("=");
+  
+              /* Removing whitespace at the beginning of the cookie name
+              and compare it with the given string */
+              if(name == cookiePair[0].trim()) {
+                  // Decode the cookie value and return
+                  return decodeURIComponent(cookiePair[1]);
+              }
+          }
+  
+          // Return null if not found
+          return null;
+      }
+      var cart = JSON.parse(getCookie('cart'))
+  
+      if (cart == undefined){
+        cart = {}
+        console.log('Cart Created!', cart)
+        document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      }
+      console.log('Cart:', cart)
+    
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          
+          
+        
+          
+          <a class="navbar-brand" href="{% url 'userprofile' %}">My Account</a>
+          
+
+         
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'firmware' %}">Firmwares</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Mobiles Accessries</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'aboutus' %}">About Us<span class="sr-only"></span></a>
+              </li>
+            
+          </ul>
+          
+            {% if request.user.is_authenticated %}
+             {% if request.user.get_full_name %}
+             <div id="current-user">
+              <h5 id='current-user1'>{{request.user.get_full_name}}</h5></div>
+              {% else %}
+            <div id="current-user">
+            <h5 id='current-user1'>{{request.user}}</h5>
+          </div>
+          {%endif%}
+          <a href="{% url 'logout' %}">
+            <button type="button" class="btn btn-success bg-dark" id='log-btn' class="ml-2">Logout</button></a>
+            {% else %}
+            <p id='no-data'>Please Login For Farther Proces</p>
+            <div class="up-btn">
+              <a href="{% url 'login' %}">
+              <button type="button" class="btn btn-success bg-dark" id='log-btn' class="ml-2"text='Login'>Login</button>
+          </div></a>
+            {% endif %}
+        
+       
+        </div>
+      </nav>
+
+
+      <div class="row">
+        <div class="col">
+            <div class="card card-body">
+              {% if messages %}
+              {% for message in messages %}
+              <ul class="messages">
+                  <div class="mr-2 alert alert-{{message.tags}}" role="alert">
+                      {{message}}
+                    </div>
+                          
+                  {% endfor %}
+                  
+                  {%endif%}</ul>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+
+
+
+
+
+
+	
+
+     <div class="container">
+            <br>
+            
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue </a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>Total Items: {{order.get_cart_items}}</h5></th>
+                        <th><h5>Payable Balnance:Rs.{{order.TotalBalance}}</h5></th>
+                        <th><h5>Name: 
+                          {% if request.user.get_full_name %}
+                          
+                           Hello {{request.user.get_full_name}}
+                           {% else %}
+                         
+                         {{request.user}}
+                       
+                       {%endif%}
+
+
+
+
+
+
+
+                        </h5></th>
+               
+					</tr>
+				</table>
+
+			</div>
+
+			<br>
+			<div class="box-element">
+				<div class="cart-row">
+				
+          <div style="flex:2"><strong>Model Name</strong></div>
+          <div style="flex:1"><strong>Type</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+          <div style="flex:1"><strong>Quantity</strong></div>
+          <div style="flex:1"><strong>Date</strong></div>
+          <div style="flex:1"><strong>Option</strong></div>
+          
+        </div>
+        {% for item in data %}
+				<div class="cart-row">
+					
+					<div style="flex:2"><p>{{item.products.product_name}}</p></div>
+					<div style="flex:1"><p>{{item.products.product_type}}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.products.product_price}}</p>
+						
+          </div>
+          <div style="flex:1"><p>{{item.quantity}}</p></div>
+          <div style="flex:1"><p>{{item.date_added}}</p></div>
+          
+          <div style="flex:1">
+            {%if item.complete_status%}
+            <button type="button" class="btn btn-outline-secondary add-btn " disabled id='del' title="You Can't Delete This Item">Delete</button>
+           {%else%}
+           <button type="button"  data-product="{{item.products.id}}" data-action="Del" class="btn btn-outline-secondary add-btn delete-item"  title="If You want to Delete this Item Press Delete Button ">Delete</button>
+           {%endif%}
+          </div>
+				</div>
+				{% endfor %}
+
+
+
+
+
+
+			</div>
+          
+      
+      
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+  </div>
+<br><br>
+
+ 
+  <!-- Bottom Bar -->
+  <nav class="navbar sticky-top navbar-dark bg-dark">
+    <div class='btm-bar'>
+    <a class="navbar-brand" >All Rights are Reserved @2019-20 By Zohaib Yousaf</a>
+  </div></nav>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="/static/js/delete.js"></script>
+</body>
+</html>

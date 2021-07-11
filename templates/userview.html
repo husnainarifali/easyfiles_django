@@ -1,0 +1,305 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{user}}</title>
+    <link rel="icon" href="https://c8.alamy.com/comp/FP6XE3/easy-icon-internet-button-on-white-background-FP6XE3.jpg" type="imagee">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+    <style>
+        #topbar
+        {
+          background-color: #4f868c!important;
+          color: white;
+          font-size:large;
+        }
+        #nn
+      {
+        color: white;
+        font-size:x-large;
+      }
+      </style>
+      <style>
+        .bg-dark
+        {
+          background-color: #4f868c!important;
+          color: white;
+          font-size:x-large;
+        }
+        .navbar-brand{
+            margin-left: 30%;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+      </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-light  mb-4 static-top shadow topbar" id='topbar'>
+    
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- Topbar Search -->
+        
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+
+          <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+          <li class="nav-item dropdown no-arrow d-sm-none">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+              <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="input-group">
+                  <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>
+          
+          <div class="topbar-divider d-none d-sm-block"></div>
+          <ul class="navbar-nav mr-auto mr-3 mt-2">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'dashboard' %}">Dasboard</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="">Firmwares</a>
+            </li>
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Mobiles Accessries</a>
+              </li>
+              
+            
+          </ul>
+          <div class="topbar-divider d-none d-sm-block"></div>
+          <!-- Nav Item - Alerts -->
+          
+
+          
+
+          <!-- Nav Item - User Information -->
+          <li class="nav-item dropdown no-arrow">
+            <a class="nav-link "   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2 d-none d-lg-inline text-white-600 x-large">{{request.user}}</span>
+              <img class="img-profile rounded-circle" style="width:50px;height:50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTUatbS2Ru11J8v5f_aFcdY0IkDA1Wk7kR1mg&usqp=CAU">
+            </a>
+
+           
+          </li>
+        
+    </ul>
+
+      </nav>
+
+
+	<br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+              
+                <h5>Customer:</h5>
+                <hr>
+                <div class="bs-example">
+                  <!-- Button HTML (to Trigger Modal) -->
+                  
+                  <!-- Modal HTML -->
+                  <div id="myModal" class="modal fade" tabindex="-1">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title">Confirmation</h5>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              <div class="modal-body">
+                                  <p class='text-danger'>Do you want to Clear {{user}} Account?</p>
+                                  <p class="text-secondary"><small>Please Confirm That User Pyment if He Paid All Money Then Clear Account.</small></p>
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <a href="{%url 'userclear' order.id%}" class="btn btn-danger">Clear Account</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                <a href="#myModal" role="button" class="btn btn-outline-info  btn-sm btn-block userviewactions"  data-toggle="modal">Clear Account</a></div>
+                {%if order.complete%}
+             
+                <a data-action ='unblock' data-id='{{order.user.id}}' class="btn btn-outline-info mt-1 btn-sm btn-block userviewactions" href="{%url 'unblockuser' order.id%}">Unblock User</a>
+                <br>
+                <p>User is Bolcked , {{user}} cannot Access Accessries pages etc</p>
+                {%else%}
+                <a class="btn btn-outline-danger  btn-sm btn-block userviewactions mt-1" href="{%url 'blockuser' order.id%}">Block</a>
+                <br>
+                <p>if {{user}} Perform any illegal activities Then Block User</p>
+                {%endif%}
+                
+            </div>
+        </div>
+    
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Contact Information</h5>
+                <hr>
+                <p>User Name: {{user}}</p>
+                <p>Email: {{user.email}}</p>
+                <p>Number: {{userinfo.phone_number}}</p>
+                <p style="font-size: 14px;">Address: {{userinfo.address}}</p>
+            </div>
+        </div>
+    
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>User Acount Information</h5>
+
+                <hr>
+                
+                <h5 style="text-align: left;padding: 10px"> Total Orders:{{ordercount}}</h5>
+                <h5 style="text-align: left;padding: 10px"> Total Amount:{{order.TotalBalance}}</h5>
+            </div>
+        </div>
+    </div>
+    
+    
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+              {% if messages %}
+              {% for message in messages %}
+              <ul class="messages">
+                  <div class="mr-2 alert alert-{{message.tags}}" role="alert">
+                      {{message}}
+                    </div>
+                          
+                  {% endfor %}
+                  {%else%}
+                  <div class="alert alert-info" role="alert">
+                    User Account Is Empty
+                  </div>	
+                  {%endif%}</ul>
+            </div>
+        </div>
+        
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>qty</th>
+                        <th>Status</th>
+                        <th>date</th>
+                       
+                        <th>Remove</th>
+                    </tr>
+    
+                   
+    
+                    <tr>
+                      {%for i in orderitem %}
+                        <td>{{i.products}}</td>
+                        <td>{{i.products.product_type}}</td>
+                        <td>{{i.products.product_price}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>{{i.complete_status}}</td>
+                        <td>{{i.date_added}}</td>
+    
+                        <td><a href="{% url 'userviewdelete' i.id %}" button type="button" class="btn btn-outline-secondary add-btn "  title="If You want to Delete this Item Press Delete Button ">Delete</button></a></td>
+                    </tr>
+                   {%endfor%}
+    
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navbar sticky-top navbar-dark bg-dark" id='topbar'>
+        <a class="navbar-brand" href="#">All RIghts are Reseved @2019-20 By Zohaib Yousaf</a>
+      
+
+
+
+        <script type="text/javascript" src="/static/js/userview.js"></script>
+        <script type="text/javascript">
+            var user = '{{request.user}}'
+          
+            function getToken(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getToken('csrftoken')
+          
+            function getCookie(name) {
+              // Split cookie string and get all individual name=value pairs in an array
+              var cookieArr = document.cookie.split(";");
+          
+              // Loop through the array elements
+              for(var i = 0; i < cookieArr.length; i++) {
+                  var cookiePair = cookieArr[i].split("=");
+          
+                  /* Removing whitespace at the beginning of the cookie name
+                  and compare it with the given string */
+                  if(name == cookiePair[0].trim()) {
+                      // Decode the cookie value and return
+                      return decodeURIComponent(cookiePair[1]);
+                  }
+              }
+          
+              // Return null if not found
+              return null;
+          }
+          var cart = JSON.parse(getCookie('cart'))
+          
+          if (cart == undefined){
+            cart = {}
+            console.log('Cart Created!', cart)
+            document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+          }
+          console.log('Cart:', cart)
+          
+          
+          </script>
+          
+      
+</body>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Activate Bootstrap 4 Modals via Data Attributes</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</html>
